@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import './css/App.css';
+import Home from "./components/Home/Home";
+import Blog from "./components/Blog/Blog";
+import StatusPage from "./components/Blog/StatusPage";
+import Products from "./components/Products/Products";
+import ProductPage from "./components/Products/ProductPage";
+import Nav from "./components/Nav/Nav";
+import {connect} from "react-redux";
 
-function App() {
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <div className="App" style={{backgroundColor: props.color}}>
+          <Nav/>
+          <Switch>
+            <Route exact path={"/"} component={Home}/>
+            <Route path={"/blog/status/:id"} component={StatusPage}/>
+            <Route path={"/blog"} component={Blog}/>
+            <Route path={"/products/item/:id"} component={ProductPage}/>
+            <Route path={"/products"} component={Products}/>
+          </Switch>
+        </div>
+      </Router>
   );
 }
 
-export default App;
+const mapStateToProps = (state)=>{
+    return {
+        color: state.color
+    }
+};
+
+export default connect(mapStateToProps)(App);
