@@ -22,10 +22,15 @@
   align-items: center;
 }
 
-.status p{
+.status p {
   margin: 0 auto;
   width: 70%;
   text-align: justify;
+}
+
+.notAnItem h3 {
+  margin: 0 auto;
+  width: 70%;
 }
 
 .App-header {
